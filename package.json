@@ -1,0 +1,38 @@
+{
+  "name": "mongoose-schema-exporter",
+  "version": "0.0.1",
+  "description": "Export mongoose schema to JSON format",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava --verbose --timeout=100s",
+    "eslint": "./node_modules/.bin/eslint -c .eslintrc src test",
+    "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc src test --fix",
+    "test-nyc": "nyc ava",
+    "test-nyc-html": "npx nyc report --reporter=html"
+  },
+  "author": {
+    "name": "Miran Setinc - Lino",
+    "url": "https://github.com/medolino"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.2.13"
+  },
+  "devDependencies": {
+    "ava": "1.0.0-beta.8",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "nyc": "^13.0.1"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ]
+  },
+  "nyc": {
+    "all": true
+  }
+}

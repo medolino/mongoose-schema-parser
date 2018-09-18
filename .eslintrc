@@ -1,0 +1,14 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint-config-standard"
+  ],
+  "globals": {},
+  "rules": {
+    "no-use-before-define": 2,
+    "symbol-description": 0
+  }
+}
