@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ava --verbose --timeout=100s",
+    "test-watch": "ava --verbose --watch --color --timeout=100s",
     "eslint": "./node_modules/.bin/eslint -c .eslintrc src test",
     "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc src test --fix",
     "test-nyc": "nyc ava",
