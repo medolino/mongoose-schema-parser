@@ -7,7 +7,7 @@ const schemaHelper = require(path.resolve('./lib/schema'))
 
 const Schema = mongoose.Schema
 
-test('export database schemas created on mongoose instance', t => {
+test('export database schemas from mongoose instance', t => {
   const FirstSchema = new Schema({ 
     name: 'string'
   })
