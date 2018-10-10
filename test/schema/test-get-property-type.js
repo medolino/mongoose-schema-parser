@@ -168,9 +168,9 @@ test('get property type Object', t => {
 })
 
 test('get property type Schema', t => {
-  const childSchema = new Schema({ 
+  const childSchema = new Schema({
     childProperty: 'string'
-  });
+  })
 
   const SampleSchema = new Schema({
     property: childSchema
@@ -181,13 +181,45 @@ test('get property type Schema', t => {
   t.is(propertyType, 'Schema')
 })
 
-test('get property type ArrayOfSchema', t => {
-  const childSchema = new Schema({ 
+test('get property type Schema, defined as type', t => {
+  const childSchema = new Schema({
     childProperty: 'string'
-  });
+  })
+
+  const SampleSchema = new Schema({
+    property: {
+      type: childSchema
+    }
+  })
+
+  const propertyType = schemaHelper.getPropertyType(SampleSchema.obj.property)
+
+  t.is(propertyType, 'Schema')
+})
+
+test('get property type ArrayOfSchema', t => {
+  const childSchema = new Schema({
+    childProperty: 'string'
+  })
 
   const SampleSchema = new Schema({
     property: [childSchema]
+  })
+
+  const propertyType = schemaHelper.getPropertyType(SampleSchema.obj.property)
+
+  t.is(propertyType, 'ArrayOfSchema')
+})
+
+test('get property type ArrayOfSchema defined as type', t => {
+  const childSchema = new Schema({
+    childProperty: 'string'
+  })
+
+  const SampleSchema = new Schema({
+    property: {
+      type: [childSchema]
+    }
   })
 
   const propertyType = schemaHelper.getPropertyType(SampleSchema.obj.property)

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "ava --verbose --timeout=100s",
     "test-watch": "ava --verbose --watch --color --timeout=100s",
-    "eslint": "./node_modules/.bin/eslint -c .eslintrc src test",
-    "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc src test --fix",
+    "eslint": "./node_modules/.bin/eslint -c .eslintrc lib test",
+    "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc lib test --fix",
     "test-nyc": "nyc ava",
     "test-nyc-html": "npx nyc report --reporter=html"
   },
@@ -16,17 +16,16 @@
     "url": "https://github.com/medolino"
   },
   "license": "ISC",
-  "dependencies": {
-    "mongoose": "^5.2.13"
-  },
   "devDependencies": {
     "ava": "1.0.0-beta.8",
+    "eslint": "^5.6.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "nyc": "^13.0.1"
+    "mongoose": "^5.3.2",
+    "nyc": "^13.1.0"
   },
   "ava": {
     "files": [
