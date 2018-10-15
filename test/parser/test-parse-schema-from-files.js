@@ -1,6 +1,5 @@
 import test from 'ava'
 
-const mongoose = require('mongoose')
 const path = require('path')
 
 const parserHelper = require(path.resolve('./lib'))
@@ -22,4 +21,3 @@ test('parse schema from array of file paths', t => {
 
   t.deepEqual(schema, expectedSchema)
 })
-
