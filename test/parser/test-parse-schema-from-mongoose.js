@@ -3,11 +3,11 @@ import test from 'ava'
 const mongoose = require('mongoose')
 const path = require('path')
 
-const schemaHelper = require(path.resolve('./lib/schema'))
+const schemaHelper = require(path.resolve('./lib'))
 
 const Schema = mongoose.Schema
 
-test('export database schemas from mongoose instance', t => {
+test('parse schemas from mongoose instance', t => {
   const FirstSchema = new Schema({
     name: 'string'
   })
@@ -19,7 +19,7 @@ test('export database schemas from mongoose instance', t => {
   mongoose.model('firstModel', FirstSchema)
   mongoose.model('secondModel', SecondSchema)
 
-  const exportedSchema = schemaHelper.exportDatabaseSchema(mongoose)
+  const exportedSchema = schemaHelper.parseSchemaFromMongoose(mongoose)
 
   const expectedSchema = {
     firstModel: {
@@ -37,9 +37,9 @@ test('export database schemas from mongoose instance', t => {
   t.deepEqual(exportedSchema, expectedSchema, 'exportedSchema does not match expectedSchema')
 })
 
-test('throw error while exporting schemas when method parameter is not mongooseInstance', t => {
+test('throw error while parsing schemas when method parameter is not mongooseInstance', t => {
   const error = t.throws(() => {
-    schemaHelper.exportDatabaseSchema('notMongooseInstance')
+    schemaHelper.parseSchemaFromMongoose('notMongooseInstance')
   }, TypeError)
 
   t.is(error.message, 'mongooseInstance should be an instance of mongoose')
