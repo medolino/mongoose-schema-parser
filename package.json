@@ -1,7 +1,7 @@
 {
   "name": "mongoose-schema-exporter",
   "version": "0.0.1",
-  "description": "Export mongoose schema to JSON format",
+  "description": "Parse mongoose schema to JS or JSON",
   "main": "index.js",
   "scripts": {
     "test": "ava --verbose --timeout=100s",
@@ -29,7 +29,7 @@
   },
   "ava": {
     "files": [
-      "test/**/*.js"
+      "test/**/test-*.js"
     ]
   },
   "nyc": {
