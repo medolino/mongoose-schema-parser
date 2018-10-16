@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
+const chalk = require('chalk')
 const yargs = require('yargs')
 
-const { parseSchemaFromFiles, outputFormats } = require('../lib')
+const { parseSchemaFromFiles } = require('../lib')
 const { findFilesByPattern, saveFile } = require('../lib/file')
 
-const argv = require('yargs')
+const argv = yargs
   .usage('Usage: mongoose-schema-parser ')
   .example(`mongoose-schema-parser`, '')
   .options({
@@ -27,12 +28,6 @@ const argv = require('yargs')
       describe: 'Output file path',
       type: 'string',
       required: true
-    },
-    f: {
-      alias: 'format',
-      describe: 'Output file format',
-      choices: outputFormats,
-      default: 'js'
     }
   })
   .help('help')
@@ -42,11 +37,24 @@ const argv = require('yargs')
   .argv
 
 try {
+  console.log(chalk.dim('======================'))
+  console.log(chalk.dim(' MongooseSchemaParser '))
+  console.log(chalk.dim('======================'))
+
   const filePaths = findFilesByPattern(argv.pattern, argv.cwd)
-  const schema = parseSchemaFromFiles(filePaths)
+
+  console.log('Number of files found:', chalk.bold(filePaths.length))
+  
+  const schema = parseSchemaFromFiles(filePaths, 'json')
+  
   saveFile(argv.output, schema)
+
+  console.log('File saved to:', chalk.bold(argv.output))
+  console.log()
+
   process.exit(0)
 } catch (e) {
-  console.error(e.message)
+  console.log(chalk.red('An error has occured:'))
+  console.log(chalk.red(e.message))
   process.exit(1)
 }

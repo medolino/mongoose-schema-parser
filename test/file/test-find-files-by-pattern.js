@@ -5,12 +5,12 @@ const path = require('path')
 const { findFilesByPattern } = require(path.resolve('./lib/file'))
 
 test('find file by patern', t => {
-  const pattern = '**/*.model.js'
+  const pattern = '**/example-0*.js'
   const cwd = process.cwd()
 
   const filePaths = findFilesByPattern(pattern, cwd)
 
-  const expectedResult = [ `${cwd}/test/test-files/example-01.model.js` ]
+  const expectedResult = [ `${cwd}/test/test-files/example-01.js` ]
 
   t.deepEqual(filePaths, expectedResult)
 })

@@ -31,7 +31,7 @@ test('return data in JSON format', t => {
 
   const outputData = format(data, 'json')
 
-  const expectedOutputData = JSON.stringify(data)
+  const expectedOutputData = JSON.stringify(data, null, 2)
 
   t.deepEqual(outputData, expectedOutputData)
 })
