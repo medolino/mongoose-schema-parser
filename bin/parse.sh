@@ -3,7 +3,7 @@
 const yargs = require('yargs')
 
 const { parseSchemaFromFiles, outputFormats } = require('../lib')
-const { findFilesByPattern } = require('../lib/file')
+const { findFilesByPattern, saveFile } = require('../lib/file')
 
 const argv = require('yargs')
   .usage('Usage: mongoose-schema-parser ')
@@ -41,10 +41,12 @@ const argv = require('yargs')
   .wrap(100)
   .argv
 
-const filePaths = findFilesByPattern(argv.pattern, argv.cwd)
-
-const schema = parseSchemaFromFiles(filePaths)
-
-console.log(schema)
-
-// TODO: export to file
+try {
+  const filePaths = findFilesByPattern(argv.pattern, argv.cwd)
+  const schema = parseSchemaFromFiles(filePaths)
+  saveFile(argv.output, schema)
+  process.exit(0)
+} catch (e) {
+  console.error(e.message)
+  process.exit(1)
+}
