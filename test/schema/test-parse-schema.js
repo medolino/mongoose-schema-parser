@@ -10,26 +10,26 @@ const Schema = mongoose.Schema
 test('parse basic schema', t => {
   const SampleSchema = new Schema({
     string: {
-      type: String,
-      maxlength: 10
+      type: String
+      // maxlength: 10
     },
     number: {
-      type: Number,
-      required: 'Missing number value'
+      type: Number
+      // required: 'Missing number value'
     },
     decimal: {
       type: Schema.Types.Decimal128
     },
     boolean: {
-      type: Boolean,
-      default: false
+      type: Boolean
+      // default: false
     },
     mixed: {
       type: Schema.Types.Mixed
     },
     objectId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Country'
+      type: Schema.Types.ObjectId
+      // ref: 'Country'
     },
     date: {
       type: Date
@@ -190,6 +190,59 @@ test('parse schema with nested array of SubSchemas defined as type', t => {
       type: 'ArrayOfSchema',
       schema: {
         childString: { type: 'String' }
+      }
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('parse schema with details', t => {
+  const childSchema = new Schema({
+    childName: {
+      type: String,
+      maxlength: 10
+    }
+  })
+
+  const SampleSchema = new Schema({
+    objectId: {
+      type: Schema.Types.ObjectId,
+      ref: 'RefSchema',
+      required: true
+    },
+    boolean: {
+      type: Boolean,
+      default: false
+    },
+    child: childSchema
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    objectId: {
+      type: 'ObjectId',
+      details: {
+        ref: 'RefSchema',
+        required: true
+      }
+    },
+    boolean: {
+      type: 'Boolean',
+      details: {
+        default: false
+      }
+    },
+    child: {
+      type: 'Schema',
+      schema: {
+        childName: {
+          type: 'String',
+          details: {
+            maxlength: 10
+          }
+        }
       }
     }
   }
