@@ -4,26 +4,28 @@ const path = require('path')
 
 const { findChildModule } = require(path.resolve('./lib'))
 
-test('find child module', async t => {
+test('find child module', t => {
   require(path.resolve('./test/test-files/example-01.js'))
-  // NOTE:
-  // I am using module.children[2], because there is more dependencies
-  // in this module that function can handle
-  const testModule = module.children[2]
-  const mongoose = findChildModule(testModule, 'Mongoose')
 
+  const testModule = module
+  const mongoose = findChildModule(testModule, 'Mongoose')
   t.is(mongoose.constructor.name, 'Mongoose')
 })
 
-test('throw error if module not found', async t => {
+test('return undefined when module not found', t => {
   require(path.resolve('./test/test-files/example-01.js'))
-  const testModule = module.children[2]
+  const testModule = module
   const moduleName = 'non-existing'
 
-  const error = t.throws(() =>
-    findChildModule(testModule, moduleName),
-  Error
-  )
+  const result = findChildModule(testModule, moduleName)
+  t.is(result, undefined)
+})
 
-  t.is(error.message, `Module ${moduleName} not found`)
+test('return undefined when module you are searching for is deeper than provided maxDepth', t => {
+  require(path.resolve('./test/test-files/example-01.js'))
+
+  const testModule = module
+  const mongoose = findChildModule(testModule, 'Mongoose', 1)
+
+  t.is(mongoose, undefined)
 })
