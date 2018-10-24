@@ -1,7 +1,7 @@
 const path = require('path')
 
-const { parseSchema } = require('./schema')
-const { format } = require('./format')
+const { parseSchema } = require('./lib/schema')
+const { format } = require('./lib/format')
 
 const parseSchemaFromMongoose = (mongooseInstance, formatName = 'js') => {
   if (typeof (mongooseInstance) !== 'object' || mongooseInstance.constructor.name !== 'Mongoose') {

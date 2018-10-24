@@ -3,12 +3,12 @@
 const chalk = require('chalk')
 const yargs = require('yargs')
 
-const { parseSchemaFromFiles } = require('../lib')
+const { parseSchemaFromFiles } = require('../')
 const { findFilesByPattern, saveFile } = require('../lib/file')
 
 const argv = yargs
-  .usage('Usage: mongoose-schema-parser ')
-  .example(`mongoose-schema-parser`, '')
+  .usage('Usage: mongoose-schema-parser -h')
+  .example('mongoose-schema-parser -c /path/to/project -p "**/*.model.js" -o output-schema.json', '')
   .options({
     c: {
       alias: 'cwd',

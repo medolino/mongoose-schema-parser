@@ -3,7 +3,7 @@ import test from 'ava'
 const mongoose = require('mongoose')
 const path = require('path')
 
-const schemaHelper = require(path.resolve('./lib'))
+const schemaHelper = require(path.resolve('./'))
 
 const Schema = mongoose.Schema
 

@@ -2,7 +2,7 @@ import test from 'ava'
 
 const path = require('path')
 
-const { findChildModule } = require(path.resolve('./lib'))
+const { findChildModule } = require(path.resolve('./'))
 
 test('find child module', t => {
   require(path.resolve('./test/test-files/example-01.js'))

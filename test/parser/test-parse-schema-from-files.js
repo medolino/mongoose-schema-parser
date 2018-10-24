@@ -2,7 +2,7 @@ import test from 'ava'
 
 const path = require('path')
 
-const parserHelper = require(path.resolve('./lib'))
+const parserHelper = require(path.resolve('./'))
 
 test.serial('throw error if no mongoose instance found', t => {
   const filePaths = [ 'test/test-files/no-mongoose-example.js' ]
