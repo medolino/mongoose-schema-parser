@@ -20,15 +20,42 @@ test.serial('parse schema from array of file paths', t => {
 
   const schema = parserHelper.parseSchemaFromFiles(filePaths)
 
-  const expectedSchema = {
-    exampleSchema: {
-      schema: {
-        name: {
-          type: 'String'
+  const expectedResponse = {
+    schema: {
+      exampleSchema: {
+        schema: {
+          name: {
+            type: 'String'
+          }
         }
       }
-    }
+    },
+    errors: []
   }
 
-  t.deepEqual(schema, expectedSchema)
+  t.deepEqual(schema, expectedResponse)
+})
+
+test.serial('return error if function cannot require provided file', t => {
+  const filePaths = [
+    'test/test-files/example-01.js',
+    'test/test-files/example-require-error.js'
+  ]
+
+  const schema = parserHelper.parseSchemaFromFiles(filePaths)
+
+  const expectedResponse = {
+    schema: {
+      exampleSchema: {
+        schema: {
+          name: {
+            type: 'String'
+          }
+        }
+      }
+    },
+    errors: [ 'test/test-files/example-require-error.js: Cannot find module \'nonExistingDependency\'' ]
+  }
+
+  t.deepEqual(schema, expectedResponse)
 })

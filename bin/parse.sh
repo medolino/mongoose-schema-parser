@@ -45,9 +45,18 @@ try {
 
   console.log('Number of files found:', chalk.bold(filePaths.length))
   
-  const schema = parseSchemaFromFiles(filePaths, 'json')
+  const schemaParseResult = parseSchemaFromFiles(filePaths, 'json')
   
-  saveFile(argv.output, schema)
+  saveFile(argv.output, schemaParseResult.schema)
+
+  if (schemaParseResult.errors.length > 0) {
+    console.log()
+    console.log(chalk.red('Done with some errors:'))
+    for (let errorMsg of schemaParseResult.errors) {
+      console.log(chalk.red(`- ${errorMsg}`))
+    }
+    console.log()
+  }
 
   console.log('File saved to:', chalk.bold(argv.output))
   console.log()
