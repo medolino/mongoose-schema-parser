@@ -9,8 +9,21 @@
     "eslint": "./node_modules/.bin/eslint -c .eslintrc lib test",
     "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc lib test --fix",
     "test-nyc": "nyc ava",
-    "test-nyc-html": "npx nyc report --reporter=html"
+    "test-nyc-html": "npx nyc report --reporter=html",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medolino/mongoose-schema-parser.git"
+  },
+  "keywords": [
+    "mongoose",
+    "schema",
+    "parse",
+    "parser",
+    "mongoose-parser",
+    "schema-parser"
+  ],
   "author": {
     "name": "Miran Setinc - Lino",
     "url": "https://github.com/medolino"
@@ -24,6 +37,7 @@
   },
   "devDependencies": {
     "ava": "1.0.0-beta.8",
+    "coveralls": "^3.0.2",
     "eslint": "^5.7.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",

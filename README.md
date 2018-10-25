@@ -1,9 +1,9 @@
 # Mongoose Schema Parser
 
-Mongoose Schema Parser is a tool which parses Mongoose schemas defined in a project and returns data in JSON format.
+Mongoose Schema Parser tool parses Mongoose schemas defined in project and returns data in JSON format.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/medolino/mongoose-schema-parser/master/img/cli-example.png" alt="Cli usage example" width="721" height="226" />
+  <img src="https://raw.githubusercontent.com/medolino/mongoose-schema-parser/master/img/cli-example.png" alt="Cli usage example" width="721" height="auto" />
 </p>
 
 ## How It Works
