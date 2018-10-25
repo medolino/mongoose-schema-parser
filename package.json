@@ -10,7 +10,7 @@
     "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc lib test --fix",
     "test-nyc": "nyc ava",
     "test-nyc-html": "npx nyc report --reporter=html",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",

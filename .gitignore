@@ -1,3 +1,19 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
 node_modules/
+
+# Coverage directory used by tools like istanbul
 coverage/
+
+# nyc test coverage
 .nyc_output/
+
+# coveralls
+.coveralls.yml
+
+# vim swap files
+*.swp
