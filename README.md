@@ -1,5 +1,11 @@
 # Mongoose Schema Parser
 
+[![Build Status](https://travis-ci.org/medolino/mongoose-schema-parser.svg?branch=master)](https://travis-ci.org/medolino/mongoose-schema-parser)
+[![Coverage Status](https://coveralls.io/repos/github/medolino/mongoose-schema-parser/badge.svg?branch=master)](https://coveralls.io/github/medolino/mongoose-schema-parser?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/medolino/mongoose-schema-parser/badge.svg?targetFile=package.json)](https://snyk.io/test/github/medolino/mongoose-schema-parser?targetFile=package.json)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![npm](https://img.shields.io/npm/v/mongoose-schema-parser.svg)](https://www.npmjs.com/package/mongoose-schema-parser)
+
 Mongoose Schema Parser tool parses Mongoose schemas defined in project and returns data in JSON format.
 
 <p align="center">

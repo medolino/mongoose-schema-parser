@@ -1,10 +1,12 @@
 {
   "name": "mongoose-schema-parser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Parse mongoose schema to JSON",
   "main": "index.js",
   "scripts": {
-    "test": "ava --verbose --timeout=100s",
+    "lint": "standard --verbose",
+    "lint-fix": "standard --fix",
+    "test": "npm run lint && ava --verbose --timeout=100s",
     "test-watch": "ava --verbose --watch --color --timeout=100s",
     "eslint": "./node_modules/.bin/eslint -c .eslintrc lib test",
     "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc lib test --fix",
@@ -44,7 +46,8 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "nyc": "^13.1.0"
+    "nyc": "^13.1.0",
+    "standard": "^12.0.1"
   },
   "ava": {
     "files": [
