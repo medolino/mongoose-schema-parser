@@ -72,9 +72,7 @@ test('parse basic schema', t => {
 test('parse schema with nested Object', t => {
   const SampleSchema = new Schema({
     nestedObject: {
-      nestedString: {
-        type: String
-      },
+      nestedString: String,
       nestedNumber: {
         type: Number
       }
@@ -200,9 +198,7 @@ test('parse schema with nested array of SubSchemas defined as type', t => {
 test('parse schema with nested array of Objects defined as Schema', t => {
   const MainSchema = new Schema({
     nestedSchemas: [{
-      childString: {
-        type: String
-      },
+      childString: String,
       name: {
         type: String
       }
