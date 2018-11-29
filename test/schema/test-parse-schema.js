@@ -197,6 +197,33 @@ test('parse schema with nested array of SubSchemas defined as type', t => {
   t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
 })
 
+test('parse schema with nested array of Objects defined as Schema', t => {
+  const MainSchema = new Schema({
+    nestedSchemas: [{
+      childString: {
+        type: String
+      },
+      name: {
+        type: String
+      }
+    }]
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(MainSchema)
+
+  const expectedSchema = {
+    nestedSchemas: {
+      type: 'ArrayOfSchema',
+      schema: {
+        childString: { type: 'String' },
+        name: { type: 'String' }
+      }
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
 test('parse schema with details', t => {
   const childSchema = new Schema({
     childName: {
