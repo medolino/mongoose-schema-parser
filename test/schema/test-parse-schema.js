@@ -69,7 +69,21 @@ test('parse basic schema', t => {
   t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
 })
 
-test('parse schema with nested Object', t => {
+test('parse schema with property type Object defined as empty object ({})', t => {
+  const SampleSchema = new Schema({
+    objProp: {}
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    objProp: { type: 'Object' }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('parse schema with nested Object defined as Schema', t => {
   const SampleSchema = new Schema({
     nestedObject: {
       nestedString: String,
@@ -83,7 +97,7 @@ test('parse schema with nested Object', t => {
 
   const expectedSchema = {
     nestedObject: {
-      type: 'Object',
+      type: 'Schema',
       schema: {
         nestedString: { type: 'String' },
         nestedNumber: { type: 'Number' }
