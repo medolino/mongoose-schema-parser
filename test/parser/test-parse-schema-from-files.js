@@ -24,6 +24,9 @@ test.serial('parse schema from array of file paths', t => {
     schema: {
       exampleSchema: {
         schema: {
+          _id: {
+            type: 'ObjectId'
+          },
           name: {
             type: 'String'
           }
@@ -48,6 +51,9 @@ test.serial('return error if function cannot require provided file', t => {
     schema: {
       exampleSchema: {
         schema: {
+          _id: {
+            type: 'ObjectId'
+          },
           name: {
             type: 'String'
           }

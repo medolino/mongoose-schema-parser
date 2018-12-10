@@ -24,11 +24,13 @@ test('parse schemas from mongoose instance', t => {
   const expectedSchema = {
     firstModel: {
       schema: {
+        _id: { type: 'ObjectId' },
         name: { type: 'String' }
       }
     },
     secondModel: {
       schema: {
+        _id: { type: 'ObjectId' },
         name: { type: 'String' }
       }
     }

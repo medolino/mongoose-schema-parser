@@ -51,6 +51,7 @@ test('parse basic schema', t => {
   const parsedSchema = schemaHelper.parseSchema(SampleSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     string: { type: 'String' },
     number: { type: 'Number' },
     decimal: { type: 'Decimal128' },
@@ -77,6 +78,7 @@ test('parse schema with property type Object defined as empty object ({})', t =>
   const parsedSchema = schemaHelper.parseSchema(SampleSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     objProp: { type: 'Object' }
   }
 
@@ -96,6 +98,7 @@ test('parse schema with nested Object defined as Schema', t => {
   const parsedSchema = schemaHelper.parseSchema(SampleSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     nestedObject: {
       type: 'Schema',
       schema: {
@@ -120,9 +123,11 @@ test('parse schema with nested SubSchema', t => {
   const parsedSchema = schemaHelper.parseSchema(MainSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     nestedSchema: {
       type: 'Schema',
       schema: {
+        _id: { type: 'ObjectId' },
         childString: { type: 'String' }
       }
     }
@@ -148,9 +153,11 @@ test('parse schema with nested SubSchema defined as type', t => {
   const parsedSchema = schemaHelper.parseSchema(MainSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     nestedSchema: {
       type: 'Schema',
       schema: {
+        _id: { type: 'ObjectId' },
         childString: { type: 'String' }
       }
     }
@@ -171,9 +178,11 @@ test('parse schema with nested array of SubSchemas', t => {
   const parsedSchema = schemaHelper.parseSchema(MainSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     nestedSchemas: {
       type: 'ArrayOfSchema',
       schema: {
+        _id: { type: 'ObjectId' },
         childString: { type: 'String' }
       }
     }
@@ -198,9 +207,11 @@ test('parse schema with nested array of SubSchemas defined as type', t => {
   const parsedSchema = schemaHelper.parseSchema(MainSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     nestedSchemas: {
       type: 'ArrayOfSchema',
       schema: {
+        _id: { type: 'ObjectId' },
         childString: { type: 'String' }
       }
     }
@@ -222,6 +233,7 @@ test('parse schema with nested array of Objects defined as Schema', t => {
   const parsedSchema = schemaHelper.parseSchema(MainSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     nestedSchemas: {
       type: 'ArrayOfSchema',
       schema: {
@@ -258,6 +270,7 @@ test('parse schema with details', t => {
   const parsedSchema = schemaHelper.parseSchema(SampleSchema)
 
   const expectedSchema = {
+    _id: { type: 'ObjectId' },
     objectId: {
       type: 'ObjectId',
       details: {
@@ -274,6 +287,9 @@ test('parse schema with details', t => {
     child: {
       type: 'Schema',
       schema: {
+        _id: {
+          type: 'ObjectId'
+        },
         childName: {
           type: 'String',
           details: {
