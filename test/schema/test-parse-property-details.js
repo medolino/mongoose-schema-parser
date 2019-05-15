@@ -5,18 +5,32 @@ const path = require('path')
 
 const { parsePropertyDetails } = require(path.resolve('./lib/schema'))
 
-const Schema = mongoose.Schema
+const { Schema } = mongoose
+const { Types } = Schema
 
 test('return object with property details (ref)', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: 'RefSchema'
     }
   })
 
   const propertyDetails = parsePropertyDetails(SampleSchema.obj.property)
+  const expectedDetails = { ref: 'RefSchema' }
 
+  t.deepEqual(propertyDetails, expectedDetails)
+})
+
+test('return object with property details when property type is ArrayOfObjectId', t => {
+  const SampleSchema = new Schema({
+    property: {
+      type: [Types.ObjectId],
+      ref: 'RefSchema'
+    }
+  })
+
+  const propertyDetails = parsePropertyDetails(SampleSchema.obj.property)
   const expectedDetails = { ref: 'RefSchema' }
 
   t.deepEqual(propertyDetails, expectedDetails)
@@ -25,7 +39,7 @@ test('return object with property details (ref)', t => {
 test('return required true when property is required', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       required: 'property is required'
     }
   })
@@ -40,7 +54,7 @@ test('return required true when property is required', t => {
 test('return required false when property is required', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       required: false
     }
   })
@@ -65,7 +79,7 @@ test('return undefined when property.type.name not found on property', t => {
 test('return undefined when no details found on property', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.ObjectId
+      type: Types.ObjectId
     }
   })
 

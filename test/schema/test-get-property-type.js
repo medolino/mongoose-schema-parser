@@ -5,7 +5,8 @@ const path = require('path')
 
 const schemaHelper = require(path.resolve('./lib/schema'))
 
-const Schema = mongoose.Schema
+const { Schema } = mongoose
+const { Types } = Schema
 
 test('get property type String', t => {
   const SampleSchema = new Schema({
@@ -34,7 +35,7 @@ test('get property type Number', t => {
 test('get property type Decimal128', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.Decimal128
+      type: Types.Decimal128
     }
   })
 
@@ -58,7 +59,7 @@ test('get property type Boolean', t => {
 test('get property type Mixed', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.Mixed
+      type: Types.Mixed
     }
   })
 
@@ -70,7 +71,7 @@ test('get property type Mixed', t => {
 test('get property type ObjectId', t => {
   const SampleSchema = new Schema({
     property: {
-      type: Schema.Types.ObjectId
+      type: Types.ObjectId
     }
   })
 
@@ -155,6 +156,16 @@ test('get property type ArrayOfNumber', t => {
   const propertyType = schemaHelper.getPropertyType(SampleSchema.obj.property)
 
   t.is(propertyType, 'ArrayOfNumber')
+})
+
+test('get property type ArrayOfObjectId', t => {
+  const SampleSchema = new Schema({
+    property: [Types.ObjectId]
+  })
+
+  const propertyType = schemaHelper.getPropertyType(SampleSchema.obj.property)
+
+  t.is(propertyType, 'ArrayOfObjectId')
 })
 
 test('get property type Object', t => {

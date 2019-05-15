@@ -6,30 +6,31 @@ const path = require('path')
 const schemaHelper = require(path.resolve('./lib/schema'))
 
 const Schema = mongoose.Schema
+const { Types } = Schema
 
 test('parse basic schema', t => {
   const SampleSchema = new Schema({
     string: {
-      type: String
-      // maxlength: 10
+      type: String,
+      maxlength: 10
     },
     number: {
-      type: Number
-      // required: 'Missing number value'
+      type: Number,
+      required: 'Missing number value'
     },
     decimal: {
-      type: Schema.Types.Decimal128
+      type: Types.Decimal128
     },
     boolean: {
-      type: Boolean
-      // default: false
+      type: Boolean,
+      default: false
     },
     mixed: {
-      type: Schema.Types.Mixed
+      type: Types.Mixed
     },
     objectId: {
-      type: Schema.Types.ObjectId
-      // ref: 'Country'
+      type: Types.ObjectId,
+      ref: 'Country'
     },
     date: {
       type: Date
@@ -45,26 +46,28 @@ test('parse basic schema', t => {
     },
     arrayEmpty: [],
     arrayOfStrings: [String],
-    arrayOfNumbers: [Number]
+    arrayOfNumbers: [Number],
+    arrayOfObjectId: [Types.ObjectId]
   })
 
   const parsedSchema = schemaHelper.parseSchema(SampleSchema)
 
   const expectedSchema = {
     _id: { type: 'ObjectId' },
-    string: { type: 'String' },
-    number: { type: 'Number' },
+    string: { type: 'String', details: { maxlength: 10 } },
+    number: { type: 'Number', details: { required: true } },
     decimal: { type: 'Decimal128' },
-    boolean: { type: 'Boolean' },
+    boolean: { type: 'Boolean', details: { default: false } },
     mixed: { type: 'Mixed' },
-    objectId: { type: 'ObjectId' },
+    objectId: { type: 'ObjectId', details: { ref: 'Country' } },
     date: { type: 'Date' },
     buffer: { type: 'Buffer' },
     map: { type: 'Map' },
     arrayWithType: { type: 'Array' },
     arrayEmpty: { type: 'Array' },
     arrayOfStrings: { type: 'ArrayOfString' },
-    arrayOfNumbers: { type: 'ArrayOfNumber' }
+    arrayOfNumbers: { type: 'ArrayOfNumber' },
+    arrayOfObjectId: { type: 'ArrayOfObjectId' }
   }
 
   t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
@@ -256,7 +259,7 @@ test('parse schema with details', t => {
 
   const SampleSchema = new Schema({
     objectId: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: 'RefSchema',
       required: true
     },
