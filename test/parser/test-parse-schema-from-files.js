@@ -60,7 +60,7 @@ test.serial('return error if function cannot require provided file', t => {
         }
       }
     },
-    errors: [ 'test/test-files/example-require-error.js: Cannot find module \'nonExistingDependency\'' ]
+    errors: [ 'Failed to require: test/test-files/example-require-error.js' ]
   }
 
   t.deepEqual(schema, expectedResponse)

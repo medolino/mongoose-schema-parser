@@ -30,7 +30,7 @@ const parseSchemaFromFiles = (filePaths, formatName = 'js') => {
     try {
       require(path.resolve(filePath))
     } catch (e) {
-      const errMsg = `${filePath}: ${e.message}`
+      const errMsg = `Failed to require: ${filePath}`
       errors.push(errMsg)
     }
   })
