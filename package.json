@@ -1,6 +1,6 @@
 {
   "name": "mongoose-schema-parser",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Parse mongoose schema to JSON",
   "main": "index.js",
   "scripts": {
@@ -34,17 +34,17 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "glob": "^7.1.4",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.6.2",
     "yargs": "^13.2.2"
   },
   "devDependencies": {
     "ava": "^1.4.1",
-    "coveralls": "^3.0.3",
+    "coveralls": "^3.0.4",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "nyc": "^14.1.1",
     "standard": "^12.0.1"
