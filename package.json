@@ -12,7 +12,9 @@
     "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc lib test --fix",
     "test-nyc": "nyc ava",
     "test-nyc-html": "npx nyc report --reporter=html",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -35,7 +37,8 @@
     "chalk": "^2.4.2",
     "glob": "^7.1.4",
     "mongoose": "^5.6.2",
-    "yargs": "^13.2.2"
+    "yargs": "^13.2.2",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "ava": "^1.4.1",
@@ -59,5 +62,6 @@
   },
   "bin": {
     "mongoose-schema-parser": "./bin/parse.sh"
-  }
+  },
+  "snyk": true
 }
