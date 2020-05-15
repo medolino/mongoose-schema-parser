@@ -1,8 +1,7 @@
-import test from 'ava'
+const test = require('ava')
+const { resolve } = require('path')
 
-const path = require('path')
-
-const { format } = require(path.resolve('./lib/format'))
+const { format } = require(resolve('./lib/format'))
 
 test('return data in JS format when no format provided', t => {
   const data = {

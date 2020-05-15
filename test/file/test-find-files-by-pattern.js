@@ -1,8 +1,7 @@
-import test from 'ava'
+const test = require('ava')
+const { resolve } = require('path')
 
-const path = require('path')
-
-const { findFilesByPattern } = require(path.resolve('./lib/file'))
+const { findFilesByPattern } = require(resolve('./lib/file'))
 
 test('find file by patern', t => {
   const pattern = '**/example-0*.js'
@@ -10,7 +9,7 @@ test('find file by patern', t => {
 
   const filePaths = findFilesByPattern(pattern, cwd)
 
-  const expectedResult = [ `${cwd}/test/test-files/example-01.js` ]
+  const expectedResult = [`${cwd}/test/test-files/example-01.js`]
 
   t.deepEqual(filePaths, expectedResult)
 })

@@ -1,9 +1,8 @@
-import test from 'ava'
-
+const test = require('ava')
 const fs = require('fs')
-const path = require('path')
+const { resolve } = require('path')
 
-const { saveFile } = require(path.resolve('./lib/file'))
+const { saveFile } = require(resolve('./lib/file'))
 
 const demoFilePath = `${process.cwd()}/test/temp/test-save-file.txt`
 
@@ -19,13 +18,12 @@ test.serial('save file with provided data', t => {
 })
 
 test.serial('throw error if path does not exist', t => {
-  const path = `invalidpath/test.txt`
+  const path = 'invalidpath/test.txt'
   const data = 'demo data'
 
-  const error = t.throws(() =>
-    saveFile(path, data),
-  Error
-  )
+  const error = t.throws(() => {
+    saveFile(path, data)
+  }, { instanceOf: Error })
 
   t.is(error.message, `ENOENT: no such file or directory, open '${path}'`)
 })

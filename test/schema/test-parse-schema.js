@@ -1,11 +1,9 @@
-import test from 'ava'
+const test = require('ava')
+const { Schema } = require('mongoose')
+const { resolve } = require('path')
 
-const mongoose = require('mongoose')
-const path = require('path')
+const schemaHelper = require(resolve('./lib/schema'))
 
-const schemaHelper = require(path.resolve('./lib/schema'))
-
-const Schema = mongoose.Schema
 const { Types } = Schema
 
 test('parse basic schema', t => {
@@ -242,6 +240,32 @@ test('parse schema with nested array of Objects defined as Schema', t => {
       schema: {
         childString: { type: 'String' },
         name: { type: 'String' }
+      }
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('differ between nested array of schema and nested array of single values', t => {
+  const MainSchema = new Schema({
+    nestedArrayOfStrings: [{
+      type: String
+    }],
+    nestedSchemas: [{
+      childString: String
+    }]
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(MainSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    nestedArrayOfStrings: { type: 'ArrayOfString' },
+    nestedSchemas: {
+      type: 'ArrayOfSchema',
+      schema: {
+        childString: { type: 'String' }
       }
     }
   }

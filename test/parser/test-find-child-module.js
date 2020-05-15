@@ -1,11 +1,10 @@
-import test from 'ava'
+const test = require('ava')
+const { resolve } = require('path')
 
-const path = require('path')
-
-const { findChildModule } = require(path.resolve('./'))
+const { findChildModule } = require(resolve('./'))
 
 test('find child module', t => {
-  require(path.resolve('./test/test-files/example-01.js'))
+  require(resolve('./test/test-files/example-01.js'))
 
   const testModule = module
   const mongoose = findChildModule(testModule, 'Mongoose')
@@ -13,7 +12,7 @@ test('find child module', t => {
 })
 
 test('return undefined when module not found', t => {
-  require(path.resolve('./test/test-files/example-01.js'))
+  require(resolve('./test/test-files/example-01.js'))
   const testModule = module
   const moduleName = 'non-existing'
 
@@ -22,7 +21,7 @@ test('return undefined when module not found', t => {
 })
 
 test('return undefined when module you are searching for is deeper than provided maxDepth', t => {
-  require(path.resolve('./test/test-files/example-01.js'))
+  require(resolve('./test/test-files/example-01.js'))
 
   const testModule = module
   const mongoose = findChildModule(testModule, 'Mongoose', 1)

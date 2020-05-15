@@ -1,8 +1,7 @@
-import test from 'ava'
+const test = require('ava')
+const { resolve } = require('path')
 
-const path = require('path')
-
-const schemaHelper = require(path.resolve('./lib/schema'))
+const schemaHelper = require(resolve('./lib/schema'))
 
 test('get schema from array', t => {
   const schema = [
@@ -47,9 +46,8 @@ test('manually add _id to schema, if options.id is true', t => {
 
   const schemaObj = schemaHelper.getSchemaObject(schema)
 
-  t.true(schemaObj.hasOwnProperty('_id'))
-  t.true(schemaObj.hasOwnProperty('_id'))
-  t.true((schemaObj._id).hasOwnProperty('type'))
+  t.true(Object.prototype.hasOwnProperty.call(schemaObj, '_id'))
+  t.true(Object.prototype.hasOwnProperty.call(schemaObj._id, 'type'))
   t.true(schemaObj._id.type.name === 'ObjectId')
   schemaObj._id.type()
 })
@@ -66,8 +64,8 @@ test('manually add _id to schema in array, if options.id is true', t => {
 
   const schemaObj = schemaHelper.getSchemaObject(schema)
 
-  t.true(schemaObj.hasOwnProperty('_id'))
-  t.true((schemaObj._id).hasOwnProperty('type'))
+  t.true(Object.prototype.hasOwnProperty.call(schemaObj, '_id'))
+  t.true(Object.prototype.hasOwnProperty.call(schemaObj._id, 'type'))
   t.true(schemaObj._id.type.name === 'ObjectId')
   schemaObj._id.type()
 })

@@ -1,11 +1,8 @@
-import test from 'ava'
+const test = require('ava')
+const { Schema } = require('mongoose')
+const { resolve } = require('path')
 
-const mongoose = require('mongoose')
-const path = require('path')
-
-const schemaHelper = require(path.resolve('./lib/schema'))
-
-const Schema = mongoose.Schema
+const schemaHelper = require(resolve('./lib/schema'))
 
 test('get type Array from mongooseSchema', t => {
   const SampleSchema = new Schema({

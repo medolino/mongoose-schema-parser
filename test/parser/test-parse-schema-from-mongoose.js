@@ -1,9 +1,8 @@
-import test from 'ava'
-
+const test = require('ava')
 const mongoose = require('mongoose')
-const path = require('path')
+const { resolve } = require('path')
 
-const schemaHelper = require(path.resolve('./'))
+const schemaHelper = require(resolve('./'))
 
 const Schema = mongoose.Schema
 
@@ -42,7 +41,7 @@ test('parse schemas from mongoose instance', t => {
 test('throw error while parsing schemas when method parameter is not mongooseInstance', t => {
   const error = t.throws(() => {
     schemaHelper.parseSchemaFromMongoose('notMongooseInstance')
-  }, TypeError)
+  }, { instanceOf: TypeError })
 
   t.is(error.message, 'mongooseInstance should be an instance of mongoose')
 })

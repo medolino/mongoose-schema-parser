@@ -1,8 +1,7 @@
-import test from 'ava'
+const test = require('ava')
+const { resolve } = require('path')
 
-const path = require('path')
-
-const { getOutputFormats } = require(path.resolve('./lib/format'))
+const { getOutputFormats } = require(resolve('./lib/format'))
 
 test('return all output formats', t => {
   const outputFormats = getOutputFormats()
