@@ -247,7 +247,7 @@ test('parse schema with nested array of Objects defined as Schema', t => {
   t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
 })
 
-test('differ between nested array of schema and nested array of single values', t => {
+test('differ between nested array of schema defined inline and nested array of single values', t => {
   const MainSchema = new Schema({
     nestedArrayOfStrings: [{
       type: String
@@ -265,6 +265,37 @@ test('differ between nested array of schema and nested array of single values', 
     nestedSchemas: {
       type: 'ArrayOfSchema',
       schema: {
+        childString: { type: 'String' }
+      }
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('differ between nested array of schema defined as subschema and nested array of single values', t => {
+  const childSchema = new Schema({
+    childString: 'string'
+  })
+
+  const MainSchema = new Schema({
+    nestedArrayOfStrings: [{
+      type: String
+    }],
+    nestedSchemas: [{
+      type: childSchema
+    }]
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(MainSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    nestedArrayOfStrings: { type: 'ArrayOfString' },
+    nestedSchemas: {
+      type: 'ArrayOfSchema',
+      schema: {
+        _id: { type: 'ObjectId' },
         childString: { type: 'String' }
       }
     }
