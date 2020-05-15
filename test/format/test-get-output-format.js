@@ -1,8 +1,7 @@
-import test from 'ava'
+const test = require('ava')
+const { resolve } = require('path')
 
-const path = require('path')
-
-const { getOutputFormat } = require(path.resolve('./lib/format'))
+const { getOutputFormat } = require(resolve('./lib/format'))
 
 test('get output format for provided name', t => {
   const outputFormat = getOutputFormat('JS')
@@ -19,10 +18,9 @@ test('get output format for provided name in lowercase format', t => {
 test('throw error if invalid name given', t => {
   const formatName = 'invalidName'
 
-  const error = t.throws(() =>
-    getOutputFormat(formatName),
-  Error
-  )
+  const error = t.throws(() => {
+    getOutputFormat(formatName)
+  }, { instanceOf: Error })
 
   t.is(error.message, `${formatName} is not a valid output format name`)
 })

@@ -1,11 +1,9 @@
-import test from 'ava'
+const test = require('ava')
+const { Schema } = require('mongoose')
+const { resolve } = require('path')
 
-const mongoose = require('mongoose')
-const path = require('path')
+const { parsePropertyDetails } = require(resolve('./lib/schema'))
 
-const { parsePropertyDetails } = require(path.resolve('./lib/schema'))
-
-const { Schema } = mongoose
 const { Types } = Schema
 
 test('return object with property details (ref)', t => {
