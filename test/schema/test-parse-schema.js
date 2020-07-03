@@ -322,7 +322,17 @@ test('parse schema with details', t => {
       type: Boolean,
       default: false
     },
-    child: childSchema
+    child: childSchema,
+    childArray: [{
+      type: Types.ObjectId,
+      ref: 'ChildRefSchema'
+    }],
+    childArrayWithType: {
+      type: [{
+        type: Types.ObjectId,
+        ref: 'ChildRefSchema'
+      }]
+    }
   })
 
   const parsedSchema = schemaHelper.parseSchema(SampleSchema)
@@ -354,6 +364,18 @@ test('parse schema with details', t => {
             maxlength: 10
           }
         }
+      }
+    },
+    childArray: {
+      type: 'ArrayOfObjectId',
+      details: {
+        ref: 'ChildRefSchema'
+      }
+    },
+    childArrayWithType: {
+      type: 'ArrayOfObjectId',
+      details: {
+        ref: 'ChildRefSchema'
       }
     }
   }
