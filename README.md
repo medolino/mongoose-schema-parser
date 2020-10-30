@@ -56,6 +56,9 @@ Output example:
 {
   "Category": {
     "schema": {
+      "_id": {
+        "type": "ObjectId"
+      },
       "name": {
         "type": "String",
         "details": {
@@ -72,26 +75,31 @@ Output example:
     }
   },
   "Item": {
-    "name": {
-      "type": "String"
-    },
-    "category": {
-      "type": "ObjectId",
-      "details": {
-        "ref": "Category"
-      }
-    },
-    "sizes": {
-      "type": "Schema",
-      "schema": {
-        "size": {
-          "type": "Number"
+    "schema": {
+      "_id": {
+        "type": "ObjectId"
+      },
+      "name": {
+        "type": "String"
+      },
+      "category": {
+        "type": "ObjectId",
+        "details": {
+          "ref": "Category"
         }
+      },
+      "sizes": {
+        "type": "Schema",
+        "schema": {
+          "size": {
+            "type": "Number"
+          }
+        }
+      },
+      "created": {
+        "type": "Date",
+        "details": {}
       }
-    },
-    "created": {
-      "type": "Date",
-      "details": {}
     }
   }
 }
@@ -118,5 +126,19 @@ require('./models/example-01.model')
 
 const exportedSchema = parseSchemaFromMongoose(mongoose)
 
-console.log(exportedSchema)
+console.log(JSON.stringify(exportedSchema, null, 2))
+/* outputs:
+{
+  "ExampleModel": {
+    "schema": {
+      "name": {
+        "type": "String"
+      },
+      "_id": {
+        "type": "ObjectId"
+      }
+    }
+  }
+}
+*/
 ```
