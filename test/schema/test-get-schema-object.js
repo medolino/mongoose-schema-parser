@@ -40,7 +40,7 @@ test('manually add _id to schema, if options.id is true', t => {
       name: 'demo'
     },
     options: {
-      id: true
+      _id: true
     }
   }
 
@@ -52,13 +52,28 @@ test('manually add _id to schema, if options.id is true', t => {
   schemaObj._id.type()
 })
 
+test('skip adding _id to schema, if options.id is false', t => {
+  const schema = {
+    obj: {
+      name: 'demo'
+    },
+    options: {
+      _id: false
+    }
+  }
+
+  const schemaObj = schemaHelper.getSchemaObject(schema)
+
+  t.false(Object.prototype.hasOwnProperty.call(schemaObj, '_id'))
+})
+
 test('manually add _id to schema in array, if options.id is true', t => {
   const schema = [{
     obj: {
       name: 'demo'
     },
     options: {
-      id: true
+      _id: true
     }
   }]
 
@@ -68,6 +83,21 @@ test('manually add _id to schema in array, if options.id is true', t => {
   t.true(Object.prototype.hasOwnProperty.call(schemaObj._id, 'type'))
   t.true(schemaObj._id.type.name === 'ObjectId')
   schemaObj._id.type()
+})
+
+test('skip adding _id to schema in array, if options.id is true', t => {
+  const schema = [{
+    obj: {
+      name: 'demo'
+    },
+    options: {
+      _id: false
+    }
+  }]
+
+  const schemaObj = schemaHelper.getSchemaObject(schema)
+
+  t.false(Object.prototype.hasOwnProperty.call(schemaObj, '_id'))
 })
 
 test('return undefined if invalid schema given', t => {
