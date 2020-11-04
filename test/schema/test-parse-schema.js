@@ -382,3 +382,119 @@ test('parse schema with details', t => {
 
   t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
 })
+
+test('parse schema with _ids', t => {
+  const childWithIdSchema = new Schema({
+    childName: {
+      type: String
+    }
+  })
+
+  const childWithoutIdSchema = new Schema({
+    childName: {
+      type: String
+    }
+  }, {
+    _id: false
+  })
+
+  const SampleSchema = new Schema({
+    name: {
+      type: String
+    },
+    childWithId: [childWithIdSchema],
+    childWithoutId: [childWithoutIdSchema]
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    name: {
+      type: 'String'
+    },
+    childWithId: {
+      type: 'ArrayOfSchema',
+      schema: {
+        _id: {
+          type: 'ObjectId'
+        },
+        childName: {
+          type: 'String'
+        }
+      }
+    },
+    childWithoutId: {
+      type: 'ArrayOfSchema',
+      schema: {
+        childName: {
+          type: 'String'
+        }
+      }
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('parse schema with timestamps', t => {
+  const childSchema = new Schema({
+    childName: {
+      type: String
+    }
+  }, {
+    timestamps: true
+  })
+
+  const SampleSchema = new Schema({
+    name: {
+      type: String
+    },
+    child: [childSchema]
+  }, {
+    timestamps: {
+      createdAt: 'nested.timestamps.createdTime'
+    }
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    name: {
+      type: 'String'
+    },
+    child: {
+      type: 'ArrayOfSchema',
+      schema: {
+        _id: {
+          type: 'ObjectId'
+        },
+        childName: {
+          type: 'String'
+        },
+        createdAt: {
+          type: 'Date'
+        },
+        updatedAt: {
+          type: 'Date'
+        }
+      }
+    },
+    nested: {
+      type: 'Schema',
+      schema: {
+        timestamps: {
+          type: 'Schema',
+          schema: {
+            createdTime: {
+              type: 'Date'
+            }
+          }
+        }
+      }
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
