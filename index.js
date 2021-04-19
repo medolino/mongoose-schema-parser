@@ -24,16 +24,15 @@ const parseSchemaFromMongoose = (mongooseInstance, formatName = 'js') => {
 }
 
 const parseSchemaFromFiles = (filePaths, formatName = 'js') => {
-  const errors = []
-
-  filePaths.map(filePath => {
+  const errors = filePaths.reduce((errArray, filePath) => {
     try {
       require(path.resolve(filePath))
     } catch (e) {
-      const errMsg = `Failed to require: ${filePath}`
-      errors.push(errMsg)
+      errArray.push(`Failed to require: ${filePath}`)
     }
-  })
+
+    return errArray
+  }, [])
 
   const mongoose = findChildModule(module, 'Mongoose')
 
