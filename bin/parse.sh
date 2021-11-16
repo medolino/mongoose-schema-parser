@@ -44,7 +44,12 @@ try {
   const filePaths = findFilesByPattern(argv.pattern, argv.cwd)
 
   console.log('Number of files found:', chalk.bold(filePaths.length))
-  
+
+  if (!filePaths.length) {
+    console.log()
+    process.exit(0)
+  }
+
   const schemaParseResult = parseSchemaFromFiles(filePaths, 'json')
   
   saveFile(argv.output, schemaParseResult.schema)
