@@ -6,6 +6,11 @@
   "extends": [
     "eslint-config-standard"
   ],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "impliedStrict": true,
+    "sourceType": "module"
+  },
   "globals": {},
   "rules": {
     "no-use-before-define": 2,
