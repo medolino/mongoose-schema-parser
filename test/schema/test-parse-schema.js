@@ -498,3 +498,84 @@ test('parse schema with timestamps', t => {
 
   t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
 })
+
+test('parse schema when only createdAt timestamp field is enabled', t => {
+  const SampleSchema = new Schema({
+    name: {
+      type: String
+    }
+  }, {
+    timestamps: {
+      createdAt: true,
+      updatedAt: false
+    }
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    name: {
+      type: 'String'
+    },
+    createdAt: {
+      type: 'Date'
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('parse schema when only updatedAt timestamp field is enabled', t => {
+  const SampleSchema = new Schema({
+    name: {
+      type: String
+    }
+  }, {
+    timestamps: {
+      createdAt: false,
+      updatedAt: true
+    }
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    name: {
+      type: 'String'
+    },
+    updatedAt: {
+      type: 'Date'
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
+
+test('parse schema when updatedAt timestamp field custom value provided and createdAt is false', t => {
+  const SampleSchema = new Schema({
+    name: {
+      type: String
+    }
+  }, {
+    timestamps: {
+      createdAt: false,
+      updatedAt: 'updated_at'
+    }
+  })
+
+  const parsedSchema = schemaHelper.parseSchema(SampleSchema)
+
+  const expectedSchema = {
+    _id: { type: 'ObjectId' },
+    name: {
+      type: 'String'
+    },
+    updated_at: {
+      type: 'Date'
+    }
+  }
+
+  t.deepEqual(parsedSchema, expectedSchema, 'parsedSchema does not match expectedSchema')
+})
