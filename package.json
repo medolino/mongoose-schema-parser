@@ -33,20 +33,20 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
-    "glob": "^8.0.3",
-    "mongoose": "^6.11.3",
-    "yargs": "^17.5.1"
+    "glob": "^10.3.3",
+    "mongoose": "^7.4.2",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "ava": "^4.3.1",
+    "ava": "^5.3.1",
     "coveralls": "^3.1.1",
-    "eslint": "^8.20.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint": "^8.46.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-promise": "^6.1.1",
     "nyc": "^15.1.0",
-    "standard": "^17.0.0"
+    "standard": "^17.1.0"
   },
   "ava": {
     "files": [

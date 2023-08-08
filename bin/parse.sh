@@ -37,13 +37,15 @@ const argv = yargs
   .argv
 
 try {
-  console.log(chalk.dim('======================'))
-  console.log(chalk.dim(' MongooseSchemaParser '))
-  console.log(chalk.dim('======================'))
+  console.log(chalk.bgBlack('-----------------------'))
+  console.log(chalk.bgBlack(` ${chalk.bold('MongooseSchemaParser')}  `))
+  console.log(chalk.bgBlack('-----------------------\n'))
+
+  console.log(`Parsing model files in: ${chalk.green(argv.cwd+'/'+chalk.green(argv.pattern))}\n`)
 
   const filePaths = findFilesByPattern(argv.pattern, argv.cwd)
 
-  console.log('Number of files found:', chalk.bold(filePaths.length))
+  console.log('Number of files found:', chalk.green(filePaths.length))
 
   if (!filePaths.length) {
     console.log()
@@ -63,7 +65,7 @@ try {
     console.log()
   }
 
-  console.log('File saved to:', chalk.bold(argv.output))
+  console.log('Parsed models saved to:', chalk.green(argv.output))
   console.log()
 
   process.exit(0)
