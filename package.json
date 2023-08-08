@@ -34,7 +34,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "glob": "^8.0.3",
-    "mongoose": "^6.5.0",
+    "mongoose": "^6.11.3",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
