@@ -1,6 +1,6 @@
 {
   "name": "mongoose-schema-parser",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "Parse mongoose schema to JSON",
   "main": "index.js",
   "scripts": {
@@ -8,11 +8,9 @@
     "lint-fix": "standard --fix",
     "test": "npm run lint && ava --verbose --timeout=100s",
     "test-watch": "ava --verbose --watch --color --timeout=100s",
-    "eslint": "./node_modules/.bin/eslint -c .eslintrc lib test",
-    "eslint-fix": "./node_modules/.bin/eslint -c .eslintrc lib test --fix",
     "test-nyc": "nyc ava",
     "test-nyc-html": "npx nyc report --reporter=html",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc npm test && nyc report --reporter=lcov"
   },
   "repository": {
     "type": "git",
@@ -33,18 +31,13 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
-    "glob": "^11.0.1",
-    "mongoose": "^8.12.1",
+    "glob": "^13.0.6",
+    "mongoose": "^9.11.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "ava": "^6.2.0",
-    "coveralls": "^3.1.1",
-    "eslint": "^8.57.1",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-node": "^11.1.0",
-    "nyc": "^17.1.0",
+    "ava": "^6.4.1",
+    "nyc": "^18.0.0",
     "standard": "^17.1.2"
   },
   "ava": {
@@ -57,5 +50,8 @@
   },
   "bin": {
     "mongoose-schema-parser": "./bin/parse.sh"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   }
 }
